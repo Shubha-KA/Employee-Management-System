@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mvn clean package -DSkipTests
+RUN mvn clean package -DskipTests
 
 # -----------stage 2: Run -------
 FROM eclipse-temurin:17-jdk-jammy

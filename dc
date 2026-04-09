@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  mysql:
+    build: ./db
+    container_name: mysql-db
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: employee-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/employee_db
+      SPRING_DATASOURCE_USERNAME: ems_user
+      SPRING_DATASOURCE_PASSWORD: ems_pass
+
+volumes:
+  mysql_data:
